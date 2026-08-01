@@ -7,17 +7,17 @@ except ImportError:
 import pytest
 
 @pytest.fixture(scope="session", autouse=True)
+def logging_config():
+    pass
+
+@pytest.fixture(scope="session", autouse=True)
 def load_env():
-    env_path = Path(__file__).parent.parent / ".env"
-    if env_path.exists():
-        try:
-            load_dotenv(env_path)
-        except NameError:
-            pass # dotenv not installed
+    env_path = r"tests\data\.env"
+    load_dotenv(env_path)
 
 @pytest.fixture(scope="session")
 def api_credentials():
     return {
-        "key": os.environ.get("BINANCE_API_KEY", "test_key"),
-        "secret": os.environ.get("BINANCE_API_SECRET", "test_secret")
+        "key": os.environ.get("BINANCE_TEST_API_KEY", "test_key"),
+        "secret": os.environ.get("BINANCE_TEST_API_SECRET", "test_secret")
     }
