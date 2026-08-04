@@ -1,14 +1,19 @@
 import os
+import logging
 from pathlib import Path
-try:
-    from dotenv import load_dotenv
-except ImportError:
-    pass
+from dotenv import load_dotenv
 import pytest
 
 @pytest.fixture(scope="session", autouse=True)
 def logging_config():
-    pass
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(created)f | %(asctime)s | %(name)s | %(levelname)s | %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S %z",
+        filemode="w",
+        filename="test_run.log",
+        force=True
+    )
 
 @pytest.fixture(scope="session", autouse=True)
 def load_env():

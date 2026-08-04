@@ -57,8 +57,8 @@ class SecureRequestConfig(RequestConfig):
     
     def query(self, offset:int=0)->str:
         raw_query = "&".join([f"{k}={v}" for k, v in self.model_dump().items() if (v is not None) and (k not in ["key", "secret"])])
-        raw_query += f"&{self.timestamp(offset)}"
-        return self.sign(raw_query)
+        raw_query += f"&timestamp={self.timestamp(offset)}"
+        return raw_query + f"&signature={self.sign(raw_query)}"
 
     def header(self)->dict:
         return {"X-MBX-APIKEY":self.key}
@@ -470,7 +470,7 @@ class SymbolConfigReturn(RootModel):
         return self.root[item]
 
 class SymbolConfigKwargs(SecureRequestConfig):
-    symbol:bool
+    symbol:str
 
 class _PositionItem(MyBaseModel):
     symbol:str
@@ -507,7 +507,7 @@ class PositionInfoReturn(RootModel):
         return self.root[item]
     
 class PositionInfoKwargs(SecureRequestConfig):
-    Symbol:str
+    symbol:str
 
 class _BalanceItem(MyBaseModel):
     account_alias:str=Field(alias="accountAlias")

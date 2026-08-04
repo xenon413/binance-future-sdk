@@ -7,6 +7,7 @@ from .schema import (
     EndPoint
 )
 from .const import BaseUrl, BinanceError
+from .exception import BinanceRestAPIError
 
 logger = logging.getLogger(__name__)
 
@@ -15,16 +16,15 @@ def handle_api_error(response: requests.Response):
         json_res:dict = response.json()
         code = json_res.get("code")
         msg = json_res.get("msg")
-        raise Exception(f"{response.status_code} API Error {code} {BinanceError.get_by_code(code)}: {msg}")
+        raise BinanceRestAPIError(f"{response.status_code} API Error {code} {BinanceError.get_by_code(code)}: {msg}")
     except ValueError:
-        raise Exception(f"API Error {response.status_code}: {response.text}")
+        raise BinanceRestAPIError(f"API Error {response.status_code}: {response.text}")
 
 def request(endpoint: EndPoint[P, R], kwargs: Optional[P] = None, test: bool = False) -> R:
     base_url = BaseUrl.TEST_URL if test else BaseUrl.URL
     full_url = f"{base_url}{endpoint.endpoint}"
     headers = kwargs.header() if kwargs else {}
     query_str = kwargs.query() if kwargs else ""
-
     req_kwargs = {
         "method":f"{endpoint.method}",
         "url":full_url,

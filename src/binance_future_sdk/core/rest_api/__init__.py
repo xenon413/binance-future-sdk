@@ -235,7 +235,7 @@ def get_account_config(
 def get_symbol_config(
     key: str,
     secret: str,
-    symbol: bool,
+    symbol: str,
     recv_window: Optional[int] = 5000,
     test: bool = False
 ) -> SymbolConfigReturn:
@@ -276,12 +276,23 @@ def auto_cancel_order(
 def get_position_info(
     key: str,
     secret: str,
-    Symbol: str,
+    symbol: str,
     recv_window: Optional[int] = 5000,
     test: bool = False
 ) -> PositionInfoReturn:
     """Get current position information."""
     kwargs = PositionInfoKwargs(
-        key=key, secret=secret, Symbol=Symbol, recv_window=recv_window
+        key=key, secret=secret, symbol=symbol, recv_window=recv_window
     )
     return request(RestEndpointCollection.POSITION_INFO.value, kwargs, test)
+
+__all__ = [
+    "CandleInterval",
+    "ContractType",
+    "MarginType",
+    "OrderSide",
+    "OrderType",
+    "PositionSide",
+    "PriceMatch",
+    "TimeInForce"
+]
