@@ -227,11 +227,9 @@ class ModifyOrderReturn(MyBaseModel):
     status:OrderStatus 
     client_order_id:str=Field(alias="clientOrderId")
     price:Decimal
-    avg_price:Decimal=Field(alias="avgPrice")
     orig_qty:Decimal=Field(alias="origQty")
     executed_qty:Decimal=Field(alias="executedQty")
     cum_qty:Decimal=Field(alias="cumQty")
-    cum_quote:Decimal=Field(None, alias="cumQuote")
     time_in_force:TimeInForce=Field(alias="timeInForce")
     type:OrderType
     reduce_only:bool=Field(alias="reduceOnly")
@@ -246,6 +244,13 @@ class ModifyOrderReturn(MyBaseModel):
     self_trade_prevention_mode:str=Field(alias="selfTradePreventionMode")
     good_till_date:int=Field(alias="goodTillDate")
     update_time:int=Field(alias="updateTime")
+
+    # --- LEGACY / REMOVED FIELDS ---
+    # Binance Integration Notice (Section C.1): Removed `cumQuote`, `avgPrice`, and `cumBase` 
+    # from order creation (POST), modification (PUT), and cancellation (DELETE) responses.
+    # Ref: https://developers.binance.com/en/docs/products/derivatives-trading-coin-futures/Important-CM-UM-Integration-Notice
+    # cum_quote:Decimal=Field(alias="cumQuote")
+    # avg_price:Decimal=Field(alias="avgPrice")
 
 class ModifyOrderKwargs(SecureRequestConfig):
     orderId:Optional[int]=None
@@ -317,10 +322,8 @@ class OrderBookTickerKwargs(RequestConfig):
 class NewOrderReturn(MyBaseModel):
     client_order_id:str=Field(alias="clientOrderId")
     cum_qty:Decimal=Field(alias="cumQty")
-    cum_quote:Decimal=Field(alias="cumQuote")
     executed_qty:Decimal=Field(alias="executedQty")
     order_id:int=Field(alias="orderId")
-    avg_price:Decimal=Field(alias="avgPrice")
     orig_qty:Decimal=Field(alias="origQty")
     price:Decimal
     reduce_only:bool=Field(alias="reduceOnly")
@@ -340,6 +343,13 @@ class NewOrderReturn(MyBaseModel):
     self_trade_prevention_mode:str=Field(alias="selfTradePreventionMode")
     good_till_date:int=Field(alias="goodTillDate")
 
+    # --- LEGACY / REMOVED FIELDS ---
+    # Binance Integration Notice (Section C.1): Removed `cumQuote`, `avgPrice`, and `cumBase` 
+    # from order creation (POST), modification (PUT), and cancellation (DELETE) responses.
+    # Ref: https://developers.binance.com/en/docs/products/derivatives-trading-coin-futures/Important-CM-UM-Integration-Notice
+    # cum_quote:Decimal=Field(alias="cumQuote")
+    # avg_price:Decimal=Field(alias="avgPrice")
+
 class NewOrderKwargs(SecureRequestConfig):
     symbol:str
     side:OrderSide
@@ -358,13 +368,11 @@ class NewOrderKwargs(SecureRequestConfig):
 class CancelOrderReturn(MyBaseModel):
     client_order_id:str=Field(alias="clientOrderId")
     cum_qty:Decimal=Field(alias="cumQty")
-    cum_quote:Decimal=Field(alias="cumQuote")
     executed_qty:Decimal=Field(alias="executedQty")
     order_id:int=Field(alias="orderId")
     order_qty:Decimal=Field(alias="origQty")
     orig_type:OrderType=Field(alias="origType")
     price:Decimal
-    avg_price:Decimal=Field(alias="avgPrice")
     reduce_only:bool=Field(alias="reduceOnly")
     side:OrderSide
     position_side:PositionSide=Field(alias="positionSide")
@@ -380,6 +388,13 @@ class CancelOrderReturn(MyBaseModel):
     price_match:str=Field(alias="priceMatch")
     self_trade_prevention_mode:str=Field(alias="selfTradePreventionMode")
     good_till_date:int=Field(alias="goodTillDate")
+
+    # --- LEGACY / REMOVED FIELDS ---
+    # Binance Integration Notice (Section C.1): Removed `cumQuote`, `avgPrice`, and `cumBase` 
+    # from order creation (POST), modification (PUT), and cancellation (DELETE) responses.
+    # Ref: https://developers.binance.com/en/docs/products/derivatives-trading-coin-futures/Important-CM-UM-Integration-Notice
+    # cum_quote:Decimal=Field(alias="cumQuote")
+    # avg_price:Decimal=Field(alias="avgPrice")
 
 class CancelOrderKwargs(SecureRequestConfig):
     symbol:str

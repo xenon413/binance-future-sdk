@@ -113,98 +113,92 @@ def test_new_order_mock(mocker, api_credentials):
 
 def test_cancel_order_mock(mocker, api_credentials):
     mock_data = {
-        "clientOrderId": "myOrder1",
-        "cumQty": "0",
-        "executedQty": "0",
-        "orderId": 283194212,
-        "origQty": "11",
-        "price": "0",
-        "reduceOnly": False,
-        "side": "BUY",
-        "positionSide": "SHORT",
-        "status": "CANCELED",
-        "stopPrice": "9300",
-        "closePosition": False,
-        "symbol": "BTCUSDT",
-        "timeInForce": "GTC",
-        "origType": "TRAILING_STOP_MARKET",
-        "type": "TRAILING_STOP_MARKET",
-        "activatePrice": "9020",
-        "priceRate": "0.3",
-        "updateTime": 1571110484038,
-        "workingType": "CONTRACT_PRICE",
-        "priceProtect": False,
-        "priceMatch": "NONE",
-        "selfTradePreventionMode": "NONE",
-        "goodTillDate": 0
+        "orderId":1174076778,
+        "symbol":"BTCUSDC",
+        "status":"CANCELED",
+        "clientOrderId":"MPFH1IqHaPFNesdeZVcRea",
+        "price":"64093.3",
+        "origQty":"0.005",
+        "executedQty":"0.000",
+        "cumQty":"0.000",
+        "timeInForce":"GTX",
+        "type":"LIMIT",
+        "reduceOnly":False,
+        "closePosition":False,
+        "side":"BUY",
+        "positionSide":"LONG",
+        "stopPrice":"0.0",
+        "workingType":"CONTRACT_PRICE",
+        "priceProtect":False,
+        "origType":"LIMIT",
+        "priceMatch":"QUEUE_20",
+        "selfTradePreventionMode":"EXPIRE_MAKER",
+        "goodTillDate":0,
+        "updateTime":1785914524364
     }
     mocker.patch("requests.request", return_value=MockResponse(mock_data))
-    res = cancel_order(**api_credentials, symbol="BTCUSDT", orderId=283194212, test=True)
-    assert res.order_id == 283194212
+    res = cancel_order(**api_credentials, symbol="BTCUSDT", orderId=1174076778, test=True)
+    assert res.order_id == 1174076778
 
 def test_query_order_mock(mocker, api_credentials):
     mock_data = {
-        "avgPrice": "0.00000",
-        "clientOrderId": "abc",
-        "cumQuote": "0",
-        "executedQty": "0",
-        "orderId": 1573346959,
-        "origQty": "0.40",
-        "origType": "TRAILING_STOP_MARKET",
-        "price": "0",
-        "reduceOnly": False,
-        "side": "BUY",
-        "positionSide": "SHORT",
-        "status": "NEW",
-        "stopPrice": "9300",
-        "closePosition": False,
-        "symbol": "BTCUSDT",
-        "time": 1579276756075,
-        "timeInForce": "GTC",
-        "type": "TRAILING_STOP_MARKET",
-        "activatePrice": "9020",
-        "priceRate": "0.3",
-        "updateTime": 1579276756075,
-        "workingType": "CONTRACT_PRICE",
-        "priceProtect": False,
-        "priceMatch": "NONE",
-        "selfTradePreventionMode": "NONE",
-        "goodTillDate": 0
+        "orderId":1174076778,
+        "symbol":"BTCUSDC",
+        "status":"NEW",
+        "clientOrderId":"MPFH1IqHaPFNesdeZVcRea",
+        "price":"64093.3",
+        "avgPrice":"0.00",
+        "origQty":"0.005",
+        "executedQty":"0.000",
+        "cumQuote":"0.0000",
+        "timeInForce":"GTX",
+        "type":"LIMIT",
+        "reduceOnly":False,
+        "closePosition":False,
+        "side":"BUY",
+        "positionSide":"LONG",
+        "stopPrice":"0.0",
+        "workingType":"CONTRACT_PRICE",
+        "priceProtect":False,
+        "origType":"LIMIT",
+        "priceMatch":"QUEUE_20",
+        "selfTradePreventionMode":"EXPIRE_MAKER",
+        "goodTillDate":0,
+        "time":1785914523256,
+        "updateTime":1785914523256
     }
     mocker.patch("requests.request", return_value=MockResponse(mock_data))
-    res = query_order(**api_credentials, symbol="BTCUSDT", orderId=1573346959, test=True)
-    assert res.order_id == 1573346959
+    res = query_order(**api_credentials, symbol="BTCUSDT", orderId=1174076778, test=True)
+    assert res.order_id == 1174076778
 
 def test_modify_order_mock(mocker, api_credentials):
     mock_data = {
-        "orderId": 20072994037,
-        "symbol": "BTCUSDT",
-        "pair": "BTCUSDT",
-        "status": "NEW",
-        "clientOrderId": "LJ9R4QZDihCaS8UAOOLpgW",
-        "modifyId": 1,
-        "price": "30005",
-        "origQty": "1",
-        "executedQty": "0",
-        "cumQty": "0",
-        "timeInForce": "GTC",
-        "type": "LIMIT",
-        "reduceOnly": True,
-        "closePosition": True,
-        "side": "BUY",
-        "positionSide": "LONG",
-        "stopPrice": "0",
-        "workingType": "CONTRACT_PRICE",
-        "priceProtect": True,
-        "origType": "LIMIT",
-        "priceMatch": "NONE",
-        "selfTradePreventionMode": "NONE",
-        "goodTillDate": 0,
-        "updateTime": 1629182711600
+        "orderId":1174076788,
+        "symbol":"BTCUSDC",
+        "status":"NEW",
+        "clientOrderId":"9DjPM75Sx5ACv2pQNhSB8c",
+        "price":"64093.3",
+        "origQty":"0.007",
+        "executedQty":"0.000",
+        "cumQty":"0.000",
+        "timeInForce":"GTX",
+        "type":"LIMIT",
+        "reduceOnly":False,
+        "closePosition":False,
+        "side":"BUY",
+        "positionSide":"LONG",
+        "stopPrice":"0.0",
+        "workingType":"CONTRACT_PRICE",
+        "priceProtect":False,
+        "origType":"LIMIT",
+        "priceMatch":"QUEUE_20",
+        "selfTradePreventionMode":"EXPIRE_MAKER",
+        "goodTillDate":0,
+        "updateTime":1785914526980
     }
     mocker.patch("requests.request", return_value=MockResponse(mock_data))
-    res = modify_order(**api_credentials, symbol="BTCUSDT", side=OrderSide.BUY, quantity=Decimal("1.0"), orderId=20072994037, price=Decimal("30005"), test=True)
-    assert res.order_id == 20072994037
+    res = modify_order(**api_credentials, symbol="BTCUSDT", side=OrderSide.BUY, quantity=Decimal("1.0"), orderId=1174076788, price=Decimal("30005"), test=True)
+    assert res.order_id == 1174076788
 
 def test_change_margin_type_mock(mocker, api_credentials):
     mocker.patch("requests.request", return_value=MockResponse({"code": 200, "msg": "success"}))
@@ -267,7 +261,7 @@ def test_get_account_config_mock(mocker, api_credentials):
 
 def test_get_symbol_config_mock(mocker, api_credentials):
     mocker.patch("requests.request", return_value=MockResponse([]))
-    res = get_symbol_config(**api_credentials, symbol=False, test=True)
+    res = get_symbol_config(**api_credentials, symbol="BTCUSDC", test=True)
     assert len(res.root) == 0
 
 def test_cancel_all_order_mock(mocker, api_credentials):
@@ -283,5 +277,5 @@ def test_auto_cancel_order_mock(mocker, api_credentials):
 
 def test_get_position_info_mock(mocker, api_credentials):
     mocker.patch("requests.request", return_value=MockResponse([]))
-    res = get_position_info(**api_credentials, Symbol="BTCUSDT", test=True)
+    res = get_position_info(**api_credentials, symbol="BTCUSDT", test=True)
     assert len(res.root) == 0

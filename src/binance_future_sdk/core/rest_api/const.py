@@ -23,6 +23,7 @@ class PriceMatch(StrEnum):
     QUEUE_5="QUEUE_5"
     QUEUE_10="QUEUE_10"
     QUEUE_20="QUEUE_20"
+    NONE="NONE" # just for matching request return
 
 class ContractType(StrEnum):
     PERPETUAL="PERPETUAL"
